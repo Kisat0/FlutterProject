@@ -9,22 +9,67 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _useRtlText = false;
+  double velo = 100;
+  String but = "Accélérer";
+  String but2 = "Stop";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Marquee',
       home: Scaffold(
-          backgroundColor: Colors.black,
-          body: Center(
-            child: ListView(
-              padding: EdgeInsets.only(top: 50),
-              children: [
-                _buildComplexMarquee(),
-              ].map(_wrapWithStuff).toList(),
-            ),
-          )),
+        backgroundColor: Colors.black,
+        body: Center(
+          child: ListView(
+            padding: EdgeInsets.only(top: 50),
+            children: [
+              Column(
+                children: [_buildComplexMarquee()].map(_wrapWithStuff).toList(),
+              ),
+              Row(children: [
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    overlayColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (but2 == 'Stop') {
+                        but2 = 'Start';
+                        velo = 10;
+                      } else {
+                        but2 = 'Stop';
+                        velo = 100;
+                      }
+                    });
+                  },
+                  child: Text(but2),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    overlayColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (but == 'Ralentir') {
+                        but = 'Accélérer';
+                        velo = 100;
+                      } else {
+                        but = 'Ralentir';
+                        velo = 200;
+                      }
+                    });
+                  },
+                  child: Text(but),
+                ),
+              ])
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -35,19 +80,16 @@ class _MyAppState extends State<MyApp> {
       scrollAxis: Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.center,
       blankSpace: 20,
-      showFadingOnlyWhenScrolling: true,
-      fadingEdgeStartFraction: 0.1,
-      fadingEdgeEndFraction: 0.1,
       startPadding: 10,
-      textDirection: _useRtlText ? TextDirection.rtl : TextDirection.ltr,
+      velocity: velo,
+      textDirection: TextDirection.ltr,
     );
   }
 
   Widget _wrapWithStuff(Widget child) {
     return Padding(
       padding: EdgeInsets.all(10),
-      child:
-      Center(
+      child: Center(
         child: Container(height: 500, color: Colors.black, child: child),
       ),
     );
