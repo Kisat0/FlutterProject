@@ -16,45 +16,40 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Marquee',
       home: Scaffold(
-        backgroundColor: Colors.black,
-        body:
-        ListView(
-          padding: EdgeInsets.only(top: 50),
-          children: [
-            _buildComplexMarquee(),
-          ].map(_wrapWithStuff).toList(),
-        ),
-      ),
+          backgroundColor: Colors.black,
+          body: Center(
+            child: ListView(
+              padding: EdgeInsets.only(top: 50),
+              children: [
+                _buildComplexMarquee(),
+              ].map(_wrapWithStuff).toList(),
+            ),
+          )),
     );
   }
 
   Widget _buildComplexMarquee() {
     return Marquee(
-      key: Key("$_useRtlText"),
-      text: !_useRtlText
-          ? 'Some sample text that takes some space.'
-          : 'זהו משפט ראשון של הטקסט הארוך. זהו המשפט השני של הטקסט הארוך',
-      style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+      text: ('Hellooooooooooooooooooooooooooooooooo'),
+      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
       scrollAxis: Axis.vertical,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      blankSpace: 10,
-      pauseAfterRound: Duration(seconds: 0),
+      crossAxisAlignment: CrossAxisAlignment.center,
+      blankSpace: 20,
       showFadingOnlyWhenScrolling: true,
       fadingEdgeStartFraction: 0.1,
       fadingEdgeEndFraction: 0.1,
       startPadding: 10,
-      accelerationDuration: Duration(seconds: 1),
-      accelerationCurve: Curves.linear,
-      decelerationDuration: Duration(milliseconds: 500),
-      decelerationCurve: Curves.easeOut,
       textDirection: _useRtlText ? TextDirection.rtl : TextDirection.ltr,
     );
   }
 
   Widget _wrapWithStuff(Widget child) {
     return Padding(
-      padding: EdgeInsets.all(16),
-      child: Container(height: 500, color: Colors.black, child: child),
+      padding: EdgeInsets.all(10),
+      child:
+      Center(
+        child: Container(height: 500, color: Colors.black, child: child),
+      ),
     );
   }
 }
