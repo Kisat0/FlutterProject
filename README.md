@@ -1,16 +1,10 @@
 # my_app
 
-A new Flutter project.
+Project Flutter For IT Consulting & Expertise
 
-## Getting Started
+## /!\ Important
 
-This project is a starting point for a Flutter application.
+Si le bouton stop est appuyé, il est nécessaire de relacer l'appli, raison ci-dessous.
+## Raison
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+La librairie 'Marquee' ne prévoit pas de faire des fonctions " stop " et " start " mais j'ai pu faire ce qu'il fallait pour mettre un bouton " stop " malgré cela, mais pour ce qui est du bouton " start " ça reste impossible à faire du fait que le widget ne se réactualise qu'à la fin de son cycle, hors avec un bouton " stop " le cycle se fige et donc impossible de réactualiser la vélocité avec un bouton " start "
