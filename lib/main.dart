@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   double velo = 100;
-  String but = "Accélérer";
-  String but2 = "Stop";
+  final bool _key = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,51 +22,98 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.black,
         body: Center(
           child: ListView(
-            padding: EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 50),
             children: [
               Column(
                 children: [_buildComplexMarquee()].map(_wrapWithStuff).toList(),
               ),
-              Row(children: [
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    overlayColor: MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      if (but2 == 'Stop') {
-                        but2 = 'Start';
-                        velo = 10;
-                      } else {
-                        but2 = 'Stop';
+              Center(
+                  child: Row(children: [
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: TextButton(
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 0, 0, 0)),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 207, 207, 207)),
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 33, 82, 243)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 255, 255, 255)),
+                        animationDuration: const Duration(seconds: 1)),
+                    onPressed: () {
+                      setState(() {
                         velo = 100;
-                      }
-                    });
-                  },
-                  child: Text(but2),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    overlayColor: MaterialStateProperty.all<Color>(Colors.blue),
+                      });
+                    },
+                    child: const Text('Start'),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      if (but == 'Ralentir') {
-                        but = 'Accélérer';
-                        velo = 100;
-                      } else {
-                        but = 'Ralentir';
-                        velo = 200;
-                      }
-                    });
-                  },
-                  child: Text(but),
                 ),
-              ])
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: TextButton(
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 0, 0, 0)),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 207, 207, 207)),
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 33, 82, 243)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 255, 255, 255)),
+                        animationDuration: const Duration(seconds: 1)),
+                    onPressed: () {
+                      setState(() {
+                        velo = 0.001;
+                      });
+                    },
+                    child: const Text('Stop'),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: TextButton(
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 0, 0, 0)),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 207, 207, 207)),
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 33, 82, 243)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 255, 255, 255)),
+                        animationDuration: const Duration(seconds: 1)),
+                    onPressed: () {
+                      setState(() {
+                        velo = 300;
+                      });
+                    },
+                    child: const Text('Speed'),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  child: TextButton(
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 0, 0, 0)),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 207, 207, 207)),
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 33, 82, 243)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 255, 255, 255)),
+                        animationDuration: const Duration(seconds: 1)),
+                    onPressed: () {
+                      setState(() {
+                        velo = 100;
+                      });
+                    },
+                    child: const Text('Slow Down'),
+                  ),
+                ),
+              ])),
             ],
           ),
         ),
@@ -75,11 +123,15 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildComplexMarquee() {
     return Marquee(
-      text: ('Hellooooooooooooooooooooooooooooooooo'),
-      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+      key: Key("$_key"),
+      text: !_key
+          ? "Lorem ipsum dolor sit amet. Ut voluptatibus omnis est doloremque repellendus non impedit tempora non quod recusandae vel corrupti officiis est incidunt fugiat! Et ipsam quibusdam vel voluptas sequi et exercitationem facilis ex sequi sint. Ab Quis consequatur ut dolor expedita et dignissimos natus eum deleniti velit et sunt quas eos quod atque aut porro voluptatem. Et nihil adipisci ut magni dolorum non eius soluta."
+          : 'key error',
+      style: const TextStyle(
+          fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
       scrollAxis: Axis.vertical,
       crossAxisAlignment: CrossAxisAlignment.center,
-      blankSpace: 20,
+      blankSpace: 30,
       startPadding: 10,
       velocity: velo,
       textDirection: TextDirection.ltr,
@@ -88,9 +140,9 @@ class _MyAppState extends State<MyApp> {
 
   Widget _wrapWithStuff(Widget child) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Center(
-        child: Container(height: 500, color: Colors.black, child: child),
+        child: Container(height: 800, color: Colors.black, child: child),
       ),
     );
   }
